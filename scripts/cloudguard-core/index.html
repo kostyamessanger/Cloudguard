@@ -1,7 +1,12 @@
-CloudGuard Core
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CloudGuard Core Code</title>
+</head>
+<body>
 
-Cookie-based reload protection.
-
+<pre><code>
 (function () {
   function getCount() {
     const m = document.cookie.match(/cloudguard_count=(\d+)/);
@@ -17,6 +22,13 @@ Cookie-based reload protection.
   setCount(count);
 
   if (count >= 5) {
-    document.documentElement.innerHTML = "CloudGuard blocked access";
+    document.documentElement.innerHTML = `
+      &lt;h1&gt;CloudGuard&lt;/h1&gt;
+      &lt;p&gt;Слишком много перезагрузок&lt;/p&gt;
+    `;
   }
 })();
+</code></pre>
+
+</body>
+</html>
