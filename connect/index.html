@@ -2,19 +2,24 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>CloudGuard — Connect</title>
+  <title>CloudGuard Connect</title>
 </head>
 <body>
 
-<h1>Connect CloudGuard 🛡️</h1>
+<h1>Подключение CloudGuard</h1>
 
-<p>Add one line to your site:</p>
+<p>Скопируйте и вставьте этот код перед <code>&lt;/body&gt;</code>:</p>
 
-<pre>
-&lt;script src="https://raw.githubusercontent.com/kostyamessanger/Cloudguard/main/cloudguard.js"&gt;&lt;/script&gt;
+<pre id="code">
+&lt;script src="https://kostyamessanger.github.io/Cloudguard/scripts/cloudguard-core.js"&gt;&lt;/script&gt;
 </pre>
 
-<p>Done. Your site is protected by CloudGuard.</p>
+<button onclick="
+navigator.clipboard.writeText(
+document.getElementById('code').innerText
+)">
+Скопировать
+</button>
 
 </body>
 </html>
