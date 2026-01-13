@@ -1,89 +1,64 @@
-// CloudGuard 🛡️ Animated Protection
-
+<script>
 (function () {
-  const LIMIT = 10;
-  const KEY = "cloudguard_requests";
+  function getCount() {
+    const match = document.cookie.match(/cloudguard_count=(\d+)/);
+    return match ? Number(match[1]) : 0;
+  }
 
-  let requests = localStorage.getItem(KEY);
-  requests = requests ? Number(requests) + 1 : 1;
-  localStorage.setItem(KEY, requests);
+  function setCount(value) {
+    document.cookie = "cloudguard_count=" + value + "; path=/";
+  }
 
-  if (requests <= LIMIT) return;
+  let count = getCount();
+  count++;
+  setCount(count);
 
-  document.documentElement.innerHTML = `
-  <head>
-    <title>CloudGuard Blocked</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        background: #0d1117;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-      }
+  // для проверки — видно, что код работает
+  console.log("CloudGuard reloads:", count);
 
-      .box {
-        text-align: center;
-        animation: fadeIn 1.2s ease forwards;
-      }
-
-      .cross {
-        font-size: 80px;
-        color: #ff5555;
-        animation: flyIn 1s ease forwards;
-      }
-
-      h1 {
-        opacity: 0;
-        animation: textIn 1s ease forwards;
-        animation-delay: 0.6s;
-      }
-
-      p {
-        opacity: 0;
-        animation: textIn 1s ease forwards;
-        animation-delay: 1s;
-      }
-
-      @keyframes flyIn {
-        from {
-          transform: translateY(-200px) rotate(180deg);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0) rotate(0);
-          opacity: 1;
-        }
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      @keyframes textIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <div class="cross">✖</div>
-      <h1>CloudGuard</h1>
-      <p>DDoS активность обнаружена</p>
-      <p>Доступ временно заблокирован</p>
-    </div>
-  </body>
-  `;
+  if (count >= 5) {
+    document.documentElement.innerHTML = `
+      <head>
+        <title>CloudGuard Blocked</title>
+        <style>
+          body {
+            margin: 0;
+            background: #0d1117;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .box {
+            text-align: center;
+            animation: fade 1s ease;
+          }
+          .x {
+            font-size: 80px;
+            color: red;
+            animation: drop 0.8s ease;
+          }
+          @keyframes drop {
+            from { transform: translateY(-200px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+          }
+          @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="box">
+          <div class="x">✖</div>
+          <h1>CloudGuard</h1>
+          <p>Слишком много перезагрузок</p>
+          <p>Доступ временно заблокирован</p>
+        </div>
+      </body>
+    `;
+  }
 })();
+</script>
