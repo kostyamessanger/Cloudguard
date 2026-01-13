@@ -3,24 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <title>CloudGuard</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0d1117;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      text-align: center;
+      animation: fadeUp 1.2s ease;
+    }
+
+    h1 {
+      font-size: 48px;
+    }
+
+    p {
+      opacity: 0.8;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #238636;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>CloudGuard 🛡️</h1>
+<script src="https://raw.githubusercontent.com/kostyamessanger/Cloudguard/main/cloudguard.js"></script>
 
-<p>
-CloudGuard — это простая защита сайта от DDoS-атак.<br>
-Работает без серверов и Cloudflare.<br>
-Подключается одной строкой.
-</p>
+<div class="card">
+  <h1>CloudGuard 🛡️</h1>
+  <p>Простая защита сайта от DDoS-атак</p>
+  <p>Без серверов и Cloudflare</p>
 
-<button onclick="location.href='connect/index.html'">
-  Как подключить
-</button>
+  <button onclick="location.href='connect/'">
+    Как подключить
+  </button>
 
-<p>
-<small>Protected by CloudGuard</small>
-</p>
+  <p><small>Protected by CloudGuard</small></p>
+</div>
 
 </body>
 </html>
